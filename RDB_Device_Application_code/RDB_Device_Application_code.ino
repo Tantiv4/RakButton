@@ -18,9 +18,9 @@
 void led_off();
 void led_ctrl(uint8_t led_num, uint8_t rgb);
 void trigger_action();
-char t4_server[] = "api-dev.tantiv4.com";    /// Name of the server we want to connect to
+char t4_server[] = "api.tantiv4.com";    /// Name of the server we want to connect to
 char path[256];
-String url = "https://api-dev.tantiv4.com/api/v1/rak/ifttt/trigger";
+String url = "https://api.tantiv4.com/api/v1/rak/ifttt/trigger";
 /*------------------------------------------------------------------------------------------------------------------*/
 unsigned char test_ca_cert[] = \
                                "-----BEGIN CERTIFICATE-----\n" \
@@ -229,7 +229,7 @@ void loop()
   if ((mode == 3) && (status != WL_CONNECTED))
   {
     FlashMemory.read();
-    if (FlashMemory.buf[0] == 0xFF)
+    if (FlashMemory.buf[0] == 0xFF || FlashMemory.buf[0] == 0x00)// check if ssid information is stored in flash,if not, start AP mode and configured wifi 
     {
       start_AP_mode(ssid_default , password_default , channel_no);
     }
